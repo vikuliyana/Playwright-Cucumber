@@ -128,6 +128,7 @@ Then('I can continue to load any additional tariffs until all tariffs have been 
     const numberOfAllAvailableTarrifsInTheListAsString: string = String(numberOfAllAvailableTarrifsInTheList);
 
     expect(totalNumberOFAvailableTariffsHint).toContain(numberOfAllAvailableTarrifsInTheListAsString);
+    await expect(loadMoreButton).not.toBeVisible();
     });
     
 
