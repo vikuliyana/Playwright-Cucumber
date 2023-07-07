@@ -1,4 +1,4 @@
-# Test project for Verivox
+# Test project
 This project is written for verivox.de. All requirements for the project are placed in the Requirements.pdf file.
 
 ## Technologies
