@@ -1,0 +1,25 @@
+{
+    "default": {
+        "formatOptions": {
+            "snippetInterface": "async-await"
+        },
+        "paths":[
+            "src/test/features/personalLiabilityCalculator.feature"   
+        ],
+        "publishQuiet": true,
+        "dryRun": false,
+        "require":[
+            "src/test/steps/*.ts",
+            "src/test/hooks/hooks.ts"
+        ],
+        "requireModule": [
+            "ts-node/register"
+        ],
+        "parallel": 3,
+        "format": [
+            "progress-bar",
+            "html:test-results/cucumber-report.html",
+            "json:test-results/cucumber-report.json"
+        ]
+    } 
+}
