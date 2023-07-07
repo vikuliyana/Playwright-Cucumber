@@ -84,6 +84,7 @@ Then('I should see the total number of available tariffs listed above all the re
 
 When('I scroll to the end of the result list page', async function () {
     await pageFixture.page.keyboard.down('End');
+    await pageFixture.page.waitForTimeout(3000);
     });
   
 
