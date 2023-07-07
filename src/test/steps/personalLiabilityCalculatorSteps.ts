@@ -97,7 +97,9 @@ Then('I should see only the first 20 tariffs displayed', async function () {
 When('I click on the button labeled 20 weitere Tarife laden', async function () {
     const loadMoreButton = pageFixture.page.locator("a.button.load-more-button");
 
-    await loadMoreButton.click();  
+    await loadMoreButton.click();
+    await pageFixture.page.keyboard.down('End');
+    await pageFixture.page.waitForTimeout(2000);
     });
 
 
