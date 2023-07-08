@@ -26,7 +26,6 @@ To enable headless mode:
 1. Go to the directory `src\helper\browsers`
 2. Edit the BrowserManager.ts file and set the headless param to true: `headless: true`  
 
-
 ### Project structure
 1. `src\test\features` -> Contains feature file
 2. `src\test\steps` -> Contains all step definitions
