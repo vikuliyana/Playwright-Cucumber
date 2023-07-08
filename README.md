@@ -1,5 +1,5 @@
 # Test project
-This project is written for verivox.de. All requirements for the project are placed in the Requirements.pdf file.
+All requirements for the project are placed in the Requirements.pdf file.
 
 ## Technologies
 Project is created with:
@@ -24,10 +24,7 @@ To run tests in multiple browser engines manually:
 
 To enable headless mode:  
 1. Go to the directory `src\helper\browsers`
-2. Edit the BrowserManager.ts file and set the headless param to true:
-`const options: LaunchOptions = {
-    headless: true,
-}`  
+2. Edit the BrowserManager.ts file and set the headless param to true: `headless: true`  
 
 
 ### Project structure
