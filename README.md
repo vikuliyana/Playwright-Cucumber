@@ -30,7 +30,7 @@ To enable headed mode:
 1. `src\test\features` -> Contains feature file
 2. `src\test\steps` -> Contains all step definitions
 3. `src\hooks\hooks.ts` -> Browser setup
-4. `src\hooks\pageFixture.ts` -> Simple way to share the page objects to steps
+4. `src\hooks\pageFixture.ts` -> To share the page objects to steps
 5. `src\helper\env` -> Multiple environments are handled
 6. `src\helper\types` -> To get environment code suggesstions
 7. `src\test-reports` -> Contains html and json test report
