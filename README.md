@@ -22,6 +22,13 @@ To run tests in multiple browser engines manually:
 * `BROWSER=firefox npm test run` to run tests using firefox
 * `BROWSER=webkit npm test run` to run tests using webkit
 
+To enable headless mode:  
+1. Go to the directory `src\helper\browsers`
+2. Edit the BrowserManager.ts file and set the headless param to true:
+`const options: LaunchOptions = {
+    headless: true,
+}`  
+
 
 ### Project structure
 1. `src\test\features` -> Contains feature file
