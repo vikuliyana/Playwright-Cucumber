@@ -43,6 +43,7 @@ Then('I go to the Privathaftpflicht personal information page', async function (
   });
 
 Then('I enter my birthdate', async function () {
+    await pageFixture.page.waitForTimeout(2000);
     await pageFixture.page.getByPlaceholder('TT.MM.JJJJ').click()
     await pageFixture.page.getByPlaceholder('TT.MM.JJJJ').fill('25.12.2000');
   });
