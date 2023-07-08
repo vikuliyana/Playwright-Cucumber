@@ -4,11 +4,11 @@ npm i
 
 npx playwright install
 
-echo "Which search engine would you like to use to run tests?"
+echo "Which browser engine would you like to use to run tests?"
 
 echo -n "chrome/webkit/firefox: "
-read -r searchEngine
+read -r browserEngine
 
-BROWSER=$searchEngine npm test run
+BROWSER=$browserEngine npm test run
 
 start ./test-results/cucumber-report.html
