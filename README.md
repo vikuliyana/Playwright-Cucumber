@@ -11,6 +11,7 @@ Project is created with:
 * test-results -> Contains reports in json and html format
 
 ## Get Started
+### Set up
 1. Clone the project
 2. Open the project in the terminal
 3. `npm config set strict-ssl false` to explicitly disable SSL
