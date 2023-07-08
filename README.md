@@ -15,7 +15,7 @@ Project is created with:
 1. Clone the project
 2. Open the project in the terminal
 3. `npm config set strict-ssl false` to explicitly disable SSL
-4. `sh get-started.sh` to automatically install all dependencies, browser engines, run test scripts in the selected environment (you will be asked which browser engine you would like to use to run tests) and open html report
+4. `sh get-started.sh` to automatically install all dependencies, browser engines, run test scripts in the selected environment (you will be asked which browser engine you would like to use to run tests) and open html report  
 To run tests in multiple browser engines manually:
 * `BROWSER=chrome npm test run` to run tests using chrome
 * `BROWSER=firefox npm test run` to run tests using firefox
