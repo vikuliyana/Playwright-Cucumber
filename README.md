@@ -31,5 +31,5 @@ To run tests in multiple browser engines manually:
 5. `src\helper\env` -> Multiple environments are handled
 6. `src\helper\types` -> To get environment code suggesstions
 7. `src\test-reports` -> Contains html and json test report
-8. cucumber.json -> Cucumber config
-9. package.json -> Contains all the dependencies
+8. `cucumber.json` -> Cucumber config
+9. `package.json` -> Contains all the dependencies
