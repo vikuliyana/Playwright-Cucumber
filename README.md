@@ -7,6 +7,7 @@ Project is created with:
 * Cucumber (BDD)
 
 ## Project structure
+* .github -> Contains yml file to execute the tests in GitHub Actions
 * src -> Contains all the features & Typescript code
 * test-results -> Contains reports in json and html format
 
