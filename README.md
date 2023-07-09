@@ -25,7 +25,7 @@ To run tests in multiple browser engines manually:
 
 To enable headed mode:  
 1. Go to the directory `src\helper\browsers`
-2. Edit the BrowserManager.ts file and set the headless param to false: `headless: false`  
+2. Edit the `BrowserManager.ts` file and set the headless param to false: `headless: false`  
 
 ### Folder structure
 1. `src\test\features` -> Contains feature file
