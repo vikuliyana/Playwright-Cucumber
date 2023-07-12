@@ -100,7 +100,6 @@ When('I click on the button labeled 20 weitere Tarife laden', async function () 
 
     await loadMoreButton.click();
     await pageFixture.page.keyboard.down('End');
-    await pageFixture.page.waitForTimeout(2000);
     });
 
 
@@ -108,6 +107,7 @@ Then('I should see the next 20 tariffs displayed', async function () {
     await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").nth(20).waitFor();
     const numberOfAvailableTarrifsInTheList: number = await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").count();
 
+    await pageFixture.page.waitForTimeout(4000);
     expect(numberOfAvailableTarrifsInTheList).toEqual(40);  
     await pageFixture.page.keyboard.down('End');
     });
@@ -162,14 +162,17 @@ Then('I see tariff details sections: “Weitere Leistungen”, “Allgemein“, 
     const tatigkeitenUndHobbysSection = pageFixture.page.locator("xpath = (//ul[@class='navigation']//li)[3]");
     const tariffDetailsSection = pageFixture.page.locator('.tab-container');
   
+    await pageFixture.page.waitForTimeout(3000);
     await expect(waitereLeistungenSection).toHaveClass('active');
     await tariffDetailsSection.isVisible();
 
     await allgemeinSection.click();
+    await pageFixture.page.waitForTimeout(3000);
     await expect(allgemeinSection).toHaveClass('active');
     await tariffDetailsSection.isVisible();
 
     await tatigkeitenUndHobbysSection.click();
+    await pageFixture.page.waitForTimeout(3000);
     await expect(tatigkeitenUndHobbysSection).toHaveClass('active');
     await tariffDetailsSection.isVisible();
     });
@@ -181,10 +184,12 @@ Then('I see tariff details sections: “Miete & Immobilien” and “Dokumente�
     const tariffDetailsSection = pageFixture.page.locator('.tab-container');
 
     await mieteImmobilienSection.click();
+    await pageFixture.page.waitForTimeout(2000);
     await expect(mieteImmobilienSection).toHaveClass('active');
     await tariffDetailsSection.isVisible();
 
     await documenteSection.click();
+    await pageFixture.page.waitForTimeout(2000);
     await expect(documenteSection).toHaveClass('active');
     await tariffDetailsSection.isVisible();
     });
