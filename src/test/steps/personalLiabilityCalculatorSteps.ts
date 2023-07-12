@@ -1,5 +1,5 @@
 import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber"
-import { expect, defineConfig, Locator } from "@playwright/test"
+import { expect, Locator } from "@playwright/test"
 import { pageFixture } from "../hooks/pageFixture";
 
 setDefaultTimeout(50 * 1000 * 2);
