@@ -1,38 +1,48 @@
 import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber"
 import { expect, Locator } from "@playwright/test"
 import { pageFixture } from "../hooks/pageFixture";
+import HomePage from "../../pages/HomePage";
+import Assert from "../../helper/wrapper/asserts";
+import * as data from "../../helper/test-data/userInformation.json";;
 
 setDefaultTimeout(50 * 1000 * 2);
 
-
+let homePage: HomePage;
+let assert: Assert;
+ 
 Given('that I can open www.verivox.de', async function () {
+    homePage = new HomePage(pageFixture.page);
+    assert = new Assert(pageFixture.page);
     await pageFixture.page.goto(process.env.BASEURL);
-    await pageFixture.page.waitForTimeout(5000);
-    await pageFixture.page.getByRole('button', { name: 'Alles Akzeptieren' }).click();
+    await homePage.acceptAllCookies();
+
+    // await pageFixture.page.waitForTimeout(5000);
+    // await pageFixture.page.getByRole('button', { name: 'Alles Akzeptieren' }).click();
   });
 
 When('I navigate to Versicherungen and select Privathaftpflicht', async function () {
-    const versicherungenButtonForChromeAndFirefoxIsAvailable = await pageFixture.page.locator("a.page-navigation-text.icn-a-angle-right-outlined.icn-shield-outlined").isVisible();
+    await homePage.openPrivathaftpflichtPage();
+    // const versicherungenButtonForChromeAndFirefoxIsAvailable = await pageFixture.page.locator("a.page-navigation-text.icn-a-angle-right-outlined.icn-shield-outlined").isVisible();
 
-    if (versicherungenButtonForChromeAndFirefoxIsAvailable) {
-      const versicherungenButtonForChromeAndFirefox = pageFixture.page.locator("a.page-navigation-text.icn-a-angle-right-outlined.icn-shield-outlined");
-      const privathaftpflichtButtonForChromeAndFirefox = pageFixture.page.getByText("Privathaftpflicht").first();
+    // if (versicherungenButtonForChromeAndFirefoxIsAvailable) {
+    //   const versicherungenButtonForChromeAndFirefox = pageFixture.page.locator("a.page-navigation-text.icn-a-angle-right-outlined.icn-shield-outlined");
+    //   const privathaftpflichtButtonForChromeAndFirefox = pageFixture.page.getByText("Privathaftpflicht").first();
 
-      await versicherungenButtonForChromeAndFirefox.hover();
-      await privathaftpflichtButtonForChromeAndFirefox.click();
-    } else {
-      const versicherungenButtonForWebkit = pageFixture.page.getByRole('banner').locator('label').filter({ hasText: 'Versicherungen' });
-      const privathaftpflichtButtonForWebkit = pageFixture.page.getByRole('banner').getByRole('link', { name: 'Privathaftpflicht' });
+    //   await versicherungenButtonForChromeAndFirefox.hover();
+    //   await privathaftpflichtButtonForChromeAndFirefox.click();
+    // } else {
+    //   const versicherungenButtonForWebkit = pageFixture.page.getByRole('banner').locator('label').filter({ hasText: 'Versicherungen' });
+    //   const privathaftpflichtButtonForWebkit = pageFixture.page.getByRole('banner').getByRole('link', { name: 'Privathaftpflicht' });
 
-      await versicherungenButtonForWebkit.click();
-      await privathaftpflichtButtonForWebkit.click();
-    };
+    //   await versicherungenButtonForWebkit.click();
+    //   await privathaftpflichtButtonForWebkit.click();
+    // };
   });
 
   When('I enter my age and Single ohne Kinder', async function () {
     const familienstandField = pageFixture.page.locator("select.float-label-select");
 
-    await pageFixture.page.fill("input[name='age']", "23");
+    await pageFixture.page.fill("input[name='age']", data.age);
     await expect(familienstandField).toHaveValue("singleWithoutChild");
   });
 
@@ -45,12 +55,12 @@ Then('I go to the Privathaftpflicht personal information page', async function (
 Then('I enter my birthdate', async function () {
     await pageFixture.page.waitForTimeout(2000);
     await pageFixture.page.getByPlaceholder('TT.MM.JJJJ').click()
-    await pageFixture.page.getByPlaceholder('TT.MM.JJJJ').fill('25.12.2000');
+    await pageFixture.page.getByPlaceholder('TT.MM.JJJJ').fill(data.birthdate);
   });
 
 Then('I enter my zip code', async function () {
     await pageFixture.page.locator('#prestep_postcode').click();
-    await pageFixture.page.locator('#prestep_postcode').fill('13088');
+    await pageFixture.page.locator('#prestep_postcode').fill(data.zip_code);
   });
 
 Then('I click the Jetzt vergleichen button', async function () {
