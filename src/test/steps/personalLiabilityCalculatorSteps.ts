@@ -3,7 +3,7 @@ import { expect, Locator } from "@playwright/test"
 import { pageFixture } from "../hooks/pageFixture";
 import HomePage from "../../pages/HomePage";
 import Assert from "../../helper/wrapper/asserts";
-import * as data from "../../helper/test-data/userInformation.json";;
+import * as data from "../../helper/test-data/testDataInformation.json";;
 
 setDefaultTimeout(50 * 1000 * 2);
 
@@ -57,7 +57,7 @@ Then('I should see a page that lists the available tariffs for my selection', as
     const numberOfAvailableTarrifsInTheList: number = await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").count();
     const selectionInformation: string = await pageFixture.page.locator("xpath = (//div[@class='filter-header']//div)[1]").textContent();
 
-    expect(selectionInformation).toContain('Single ohne Kinder' && '13088');
+    expect(selectionInformation).toContain(data.children && data.zip_code);
     expect(numberOfAvailableTarrifsInTheList).toBeGreaterThanOrEqual(4);
   });
 
