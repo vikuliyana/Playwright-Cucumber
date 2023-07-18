@@ -21,8 +21,11 @@ Project is created with:
 To run tests in multiple browser engines manually:
 * `BROWSER=chrome npm test run` to run tests using chrome
 * `BROWSER=firefox npm test run` to run tests using firefox
-* `BROWSER=webkit npm test run` to run tests using webkit
-
+* `BROWSER=webkit npm test run` to run tests using webkit  
+  
+For running only one scenario in feature file:  
+`npm run test <FullPathOfFeature>.feature:<LineOfCodeWhereScenarioIsDefined>`  
+  
 To enable headed mode:  
 1. Go to the directory `src\helper\browsers`
 2. Edit the `BrowserManager.ts` file and set the headless param to false: `headless: false`  
