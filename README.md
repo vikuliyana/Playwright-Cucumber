@@ -24,7 +24,7 @@ To run tests in multiple browser engines manually:
 * `BROWSER=webkit npm test run` to run tests using webkit  
   
 For running only one scenario in feature file:  
-`npm run test <FullPathOfFeature>.feature:<LineOfCodeWhereScenarioIsDefined>`  
+`BROWSER=<YourBrowserEngine> npm run test <FullPathOfFeature>.feature:<LineOfCodeWhereScenarioIsDefined>`  
   
 To enable headed mode:  
 1. Go to the directory `src\helper\browsers`
