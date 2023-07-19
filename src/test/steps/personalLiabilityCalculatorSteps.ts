@@ -2,54 +2,48 @@ import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber"
 import { expect, Locator } from "@playwright/test"
 import { pageFixture } from "../hooks/pageFixture";
 import HomePage from "../../pages/HomePage";
-import Assert from "../../helper/wrapper/asserts";
-import * as data from "../../helper/test-data/testDataInformation.json";;
+import PrivathaftpflichtPage from "../../pages/PrivathaftpflichtPage";
+import PrivathaftpflichtPersonalInformationPage from "../../pages/PrivathaftpflichtPersonalInformationPage";
+import * as data from "../../helper/test-data/testDataInformation.json";
 
 setDefaultTimeout(50 * 1000 * 2);
 
 let homePage: HomePage;
-let assert: Assert;
- 
+let privathaftpflichtPage: PrivathaftpflichtPage;
+let privathaftpflichtPersonalInformationPage: PrivathaftpflichtPersonalInformationPage;
+
 Given('that I can open www.verivox.de', async function () {
     homePage = new HomePage(pageFixture.page);
-    assert = new Assert(pageFixture.page);
     await pageFixture.page.goto(process.env.BASEURL);
     await homePage.acceptAllCookies();
   });
 
 When('I navigate to Versicherungen and select Privathaftpflicht', async function () {
+    await homePage.openVersicherungenTab();
     await homePage.openPrivathaftpflichtPage();
   });
 
   When('I enter my age and Single ohne Kinder', async function () {
-    const familienstandField = pageFixture.page.locator("select.float-label-select");
-
-    await pageFixture.page.fill("input[name='age']", data.age);
-    await expect(familienstandField).toHaveValue("singleWithoutChild");
+    privathaftpflichtPage = new PrivathaftpflichtPage(pageFixture.page);
+    await privathaftpflichtPage.enterAge(data.age);
+    await privathaftpflichtPage.checkFamilienstandFieldValue(data.FamilienstandFieldValue);
   });
 
 Then('I go to the Privathaftpflicht personal information page', async function () {
-    const jetztVergleichenButton = pageFixture.page.locator("xpath = //button[text()='Jetzt vergleichen']");
-
-    await jetztVergleichenButton.click();
+    await privathaftpflichtPage.goToThePrivathaftpflichtPersonalInformationPage();
   });
 
 Then('I enter my birthdate', async function () {
-    await pageFixture.page.waitForTimeout(2000);
-    await pageFixture.page.getByPlaceholder('TT.MM.JJJJ').click()
-    await pageFixture.page.getByPlaceholder('TT.MM.JJJJ').fill(data.birthdate);
+    privathaftpflichtPersonalInformationPage = new PrivathaftpflichtPersonalInformationPage(pageFixture.page);
+    await privathaftpflichtPersonalInformationPage.enterBirthdate(data.birthdate);
   });
 
 Then('I enter my zip code', async function () {
-    await pageFixture.page.locator('#prestep_postcode').click();
-    await pageFixture.page.locator('#prestep_postcode').fill(data.zip_code);
+    await privathaftpflichtPersonalInformationPage.enterZipCode(data.zip_code);
   });
 
 Then('I click the Jetzt vergleichen button', async function () {
-    const jetztVergleichenButton = pageFixture.page.locator("button.button");
-
-    await pageFixture.page.waitForTimeout(5000);
-    await jetztVergleichenButton.click();
+    await privathaftpflichtPersonalInformationPage.goToTheSearchTariffsPage();
   });
 
 Then('I should see a page that lists the available tariffs for my selection', async function () {

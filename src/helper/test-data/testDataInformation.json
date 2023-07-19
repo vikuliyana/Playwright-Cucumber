@@ -2,5 +2,6 @@
     "age": "23",
     "birthdate": "25.12.2000",
     "zip_code": "13088",
-    "children": "Single ohne Kinder"
+    "children": "Single ohne Kinder",
+    "FamilienstandFieldValue": "singleWithoutChild"
 }
