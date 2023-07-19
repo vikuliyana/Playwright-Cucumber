@@ -4,6 +4,7 @@ import { pageFixture } from "../hooks/pageFixture";
 import HomePage from "../../pages/HomePage";
 import PrivathaftpflichtPage from "../../pages/PrivathaftpflichtPage";
 import PrivathaftpflichtPersonalInformationPage from "../../pages/PrivathaftpflichtPersonalInformationPage";
+import SearchTariffsPage from "../../pages/SearchTariffsPage";
 import * as data from "../../helper/test-data/testDataInformation.json";
 
 setDefaultTimeout(50 * 1000 * 2);
@@ -11,6 +12,7 @@ setDefaultTimeout(50 * 1000 * 2);
 let homePage: HomePage;
 let privathaftpflichtPage: PrivathaftpflichtPage;
 let privathaftpflichtPersonalInformationPage: PrivathaftpflichtPersonalInformationPage;
+let searchTariffsPage: SearchTariffsPage;
 
 Given('that I can open www.verivox.de', async function () {
     homePage = new HomePage(pageFixture.page);
@@ -47,31 +49,23 @@ Then('I click the Jetzt vergleichen button', async function () {
   });
 
 Then('I should see a page that lists the available tariffs for my selection', async function () {
-    await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").first().waitFor();
-    const numberOfAvailableTarrifsInTheList: number = await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").count();
-    const selectionInformation: string = await pageFixture.page.locator("xpath = (//div[@class='filter-header']//div)[1]").textContent();
-
-    expect(selectionInformation).toContain(data.children && data.zip_code);
-    expect(numberOfAvailableTarrifsInTheList).toBeGreaterThanOrEqual(4);
+    searchTariffsPage = new SearchTariffsPage(pageFixture.page);
+    await searchTariffsPage.waitForTheFirstTariffToBeAvailable();
+    await searchTariffsPage.availableTariffsCorrespondToTheSelectedData(data.children, data.zip_code);
   });
 
 
 When('I display the tariff Result List page', async function () {
-    const resultList = pageFixture.page.locator("results-container"); 
-    
-    await resultList.isVisible();
+    await searchTariffsPage.resultListIsVisible();
     });
 
 Then('I should see the total number of available tariffs listed above all the result list', async function () {
-    const totalNumberOFAvailableTariffsHint = pageFixture.page.locator("xpath = filtered-products-hint");
-
-    await totalNumberOFAvailableTariffsHint.isVisible();  
+    await searchTariffsPage.totalNumberOFAvailableTariffsHintIsVisible();
     });
   
 
 When('I scroll to the end of the result list page', async function () {
-    await pageFixture.page.keyboard.down('End');
-    await pageFixture.page.waitForTimeout(3000);
+    await searchTariffsPage.scrollToTheEndOfThePage();
     });
   
 

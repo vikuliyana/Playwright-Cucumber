@@ -10,9 +10,9 @@ export default class homePage {
     }
 
     private Elements = {
-        familienstandField: "select.float-label-select",
+        familienstandFieldLocator: "select.float-label-select",
         ageField: "input[name='age']",
-        jetztVergleichenBtn: "xpath = //button[text()='Jetzt vergleichen']"
+        jetztVergleichenBtnLocator: "xpath = //button[text()='Jetzt vergleichen']"
     }
 
     async enterAge(age: string) {
@@ -20,12 +20,12 @@ export default class homePage {
     }
 
     async checkFamilienstandFieldValue(familienstandFieldValue: string) {
-        const familienstandFieldLocator = this.page.locator(this.Elements.familienstandField);
-        await expect(familienstandFieldLocator).toHaveValue(familienstandFieldValue);
+        const familienstandField = this.page.locator(this.Elements.familienstandFieldLocator);
+        await expect(familienstandField).toHaveValue(familienstandFieldValue);
     }
 
     async goToThePrivathaftpflichtPersonalInformationPage() {
-        const jetztVergleichenBtnLocator = this.page.locator(this.Elements.jetztVergleichenBtn)
-        await this.base.waitAndClick(jetztVergleichenBtnLocator);
+        const jetztVergleichenBtn = this.page.locator(this.Elements.jetztVergleichenBtnLocator)
+        await this.base.waitAndClick(jetztVergleichenBtn);
     }
 }

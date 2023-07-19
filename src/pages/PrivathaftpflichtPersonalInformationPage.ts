@@ -14,18 +14,18 @@ export default class PrivathaftpflichtPersonalInformationPage {
     }
 
     async enterBirthdate(date: string) {
-        const birthdateFieldLocator = this.page.getByPlaceholder('TT.MM.JJJJ');
-        await this.base.fillTheField(birthdateFieldLocator, date)
+        const birthdateField = this.page.getByPlaceholder('TT.MM.JJJJ');
+        await this.base.fillTheField(birthdateField, date)
     }
 
     async enterZipCode(zipCode: string) {
-        const zipCodeFieldLocator = this.page.locator('#prestep_postcode');
-        await this.base.fillTheField(zipCodeFieldLocator, zipCode);
+        const zipCodeField = this.page.locator('#prestep_postcode');
+        await this.base.fillTheField(zipCodeField, zipCode);
     }
 
     async goToTheSearchTariffsPage() {
-        const jetztVergleichenBtnLocator = this.page.locator(this.Elements.jetztVergleichenBtn)
-        await this.base.waitAndClick(jetztVergleichenBtnLocator);
+        const jetztVergleichenBtn = this.page.locator(this.Elements.jetztVergleichenBtn)
+        await this.base.waitAndClick(jetztVergleichenBtn);
     }
     
 }
