@@ -14,7 +14,7 @@ Project is created with:
 ## Get Started
 ### Set up
 1. Clone or download the project
-2. Open the project in the terminal
+2. Open the project in the bash terminal
 3. `npm config set strict-ssl false` to explicitly disable SSL
 4. `sh get-started.sh` to automatically install all dependencies, browser engines, run test scripts in the selected environment (you will be asked which browser engine you would like to use to run tests) and open html report
     
