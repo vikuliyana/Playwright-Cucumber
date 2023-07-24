@@ -31,7 +31,7 @@ To enable headed mode:
 2. Edit the `BrowserManager.ts` file and set the headless param to false: `headless: false`  
 
 ### Folder structure
-1. `src\pages` -> All the page (UI screen)
+1. `src\pages` -> All the pages (UI screen)
 2. `src\test\features` -> Contains feature file
 3. `src\test\steps` -> Contains all step definitions
 4. `src\hooks\hooks.ts` -> Browser setup
