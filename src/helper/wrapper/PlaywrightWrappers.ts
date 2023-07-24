@@ -5,7 +5,7 @@ export default class PlaywrightWrapper {
     constructor(private page: Page) { }
 
     async waitAndClick(element: Locator) {
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(2000);
         await element.click();
     };
 

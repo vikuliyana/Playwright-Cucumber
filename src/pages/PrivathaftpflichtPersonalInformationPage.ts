@@ -10,16 +10,18 @@ export default class PrivathaftpflichtPersonalInformationPage {
     }
 
     private Elements = {
-        jetztVergleichenBtn: "button.button"
+        jetztVergleichenBtn: "button.button",
+        birthdateFieldLocator: "TT.MM.JJJJ",
+        zipCodeFieldLocator: "#prestep_postcode"
     }
 
     async enterBirthdate(date: string) {
-        const birthdateField = this.page.getByPlaceholder('TT.MM.JJJJ');
+        const birthdateField = this.page.getByPlaceholder(this.Elements.birthdateFieldLocator);
         await this.base.fillTheField(birthdateField, date)
     }
 
     async enterZipCode(zipCode: string) {
-        const zipCodeField = this.page.locator('#prestep_postcode');
+        const zipCodeField = this.page.locator(this.Elements.zipCodeFieldLocator);
         await this.base.fillTheField(zipCodeField, zipCode);
     }
 

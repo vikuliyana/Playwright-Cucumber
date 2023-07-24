@@ -70,61 +70,39 @@ When('I scroll to the end of the result list page', async function () {
   
 
 Then('I should see only the first 20 tariffs displayed', async function () {
-    const numberOfAvailableTarrifsInTheList: number = await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").count(); 
-    
-    expect(numberOfAvailableTarrifsInTheList).toEqual(20);
+    await searchTariffsPage.totalNumberOFAvailableTariffsToEqual(20);
     });
 
 When('I click on the button labeled 20 weitere Tarife laden', async function () {
-    const loadMoreButton = pageFixture.page.locator("a.button.load-more-button");
-
-    await loadMoreButton.click();
-    await pageFixture.page.keyboard.down('End');
+    await searchTariffsPage.loadMoreBtnClick();
+    await searchTariffsPage.scrollToTheEndOfThePage();
     });
 
 
 Then('I should see the next 20 tariffs displayed', async function () {
-    await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").nth(20).waitFor();
-    const numberOfAvailableTarrifsInTheList: number = await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").count();
-
-    await pageFixture.page.waitForTimeout(4000);
-    expect(numberOfAvailableTarrifsInTheList).toEqual(40);  
-    await pageFixture.page.keyboard.down('End');
+    // await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").nth(20).waitFor();
+    await pageFixture.page.waitForTimeout(2000);
+    await searchTariffsPage.totalNumberOFAvailableTariffsToEqual(40); 
     });
 
 
 Then('I can continue to load any additional tariffs until all tariffs have been displayed', async function () {
-    const loadMoreButton = pageFixture.page.locator("a.button.load-more-button");
-    const totalNumberOFAvailableTariffsHint: string = await pageFixture.page.locator("xpath = (//div[@class='filtered']//span)[1]").textContent();
-    let numberOfAvailableTariffsCount: number = await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").count();
-
-    while (await loadMoreButton.isVisible()) {
-      await loadMoreButton.click(); 
-      await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").nth(numberOfAvailableTariffsCount).waitFor();
-      numberOfAvailableTariffsCount = numberOfAvailableTariffsCount + 20;
-      await pageFixture.page.keyboard.down('End');
-    };
-    
-    const numberOfAllAvailableTarrifsInTheList: number = await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").count();
-    const numberOfAllAvailableTarrifsInTheListAsString: string = String(numberOfAllAvailableTarrifsInTheList);
-
-    expect(totalNumberOFAvailableTariffsHint).toContain(numberOfAllAvailableTarrifsInTheListAsString);
-    await expect(loadMoreButton).not.toBeVisible();
-    });
+    await searchTariffsPage.loadAllAvailableTariffs();
+  });
     
 
 Given('I display the tariff result list page', async function () {
     const resultList = pageFixture.page.locator("results-container"); 
     
     await resultList.isVisible();     
-    });
+  });
   
 
 Then('I should see the tariff price of the first tariff', async function () {
     const priceOfTheFirstTaiff = pageFixture.page.locator(".group-price").first();
 
     await priceOfTheFirstTaiff.isVisible();      
-    });
+  });
   
 
 When('I open tariff details', async function () {
@@ -140,38 +118,19 @@ Then('I see tariff details sections: “Weitere Leistungen”, “Allgemein“, 
     const waitereLeistungenSection = pageFixture.page.locator("xpath = //ul[@class='navigation']//li[1]");
     const allgemeinSection = pageFixture.page.locator("xpath = (//ul[@class='navigation']//li)[2]");
     const tatigkeitenUndHobbysSection = pageFixture.page.locator("xpath = (//ul[@class='navigation']//li)[3]");
-    const tariffDetailsSection = pageFixture.page.locator('.tab-container');
   
-    await pageFixture.page.waitForTimeout(3000);
-    await expect(waitereLeistungenSection).toHaveClass('active');
-    await tariffDetailsSection.isVisible();
-
-    await allgemeinSection.click();
-    await pageFixture.page.waitForTimeout(3000);
-    await expect(allgemeinSection).toHaveClass('active');
-    await tariffDetailsSection.isVisible();
-
-    await tatigkeitenUndHobbysSection.click();
-    await pageFixture.page.waitForTimeout(3000);
-    await expect(tatigkeitenUndHobbysSection).toHaveClass('active');
-    await tariffDetailsSection.isVisible();
+    await searchTariffsPage.tariffDetailsSectionIsVisible(waitereLeistungenSection);
+    await searchTariffsPage.tariffDetailsSectionIsVisible(allgemeinSection);
+    await searchTariffsPage.tariffDetailsSectionIsVisible(tatigkeitenUndHobbysSection);
     });
 
 
 Then('I see tariff details sections: “Miete & Immobilien” and “Dokumente”', async function () {
     const mieteImmobilienSection = pageFixture.page.locator("xpath = (//ul[@class='navigation']//li)[4]");
     const documenteSection = pageFixture.page.locator("xpath = (//ul[@class='navigation']//li)[5]");
-    const tariffDetailsSection = pageFixture.page.locator('.tab-container');
 
-    await mieteImmobilienSection.click();
-    await pageFixture.page.waitForTimeout(2000);
-    await expect(mieteImmobilienSection).toHaveClass('active');
-    await tariffDetailsSection.isVisible();
-
-    await documenteSection.click();
-    await pageFixture.page.waitForTimeout(2000);
-    await expect(documenteSection).toHaveClass('active');
-    await tariffDetailsSection.isVisible();
+    await searchTariffsPage.tariffDetailsSectionIsVisible(mieteImmobilienSection);
+    await searchTariffsPage.tariffDetailsSectionIsVisible(documenteSection);
     });
 
 
