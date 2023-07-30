@@ -12,7 +12,7 @@ export default class PrivathaftpflichtPersonalInformationPage {
     private Elements = {
         jetztVergleichenBtn: "button.button",
         birthdateFieldLocator: "input[placeholder='TT.MM.JJJJ']",
-        zipCodeFieldLocator: "#prestep_postcode"
+        zipCodeFieldLocator: "#prestep_postcode-input"
     }
 
     async enterBirthdate(date: string) {
@@ -23,7 +23,7 @@ export default class PrivathaftpflichtPersonalInformationPage {
 
     async enterZipCode(zipCode: string) {
         const zipCodeField = this.page.locator(this.Elements.zipCodeFieldLocator);
-        await this.base.fillTheField(zipCodeField, zipCode);
+        await zipCodeField.fill(zipCode);
     }
 
     async goToTheSearchTariffsPage() {
