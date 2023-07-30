@@ -85,4 +85,20 @@ export default class SearchTariffsPage {
         await expect(section).toHaveClass('active');
         await tariffDetailsSection.isVisible();
     }
+
+    async tariffResultListIsVisible() {
+        const resultList = this.page.locator("results-container"); 
+        await resultList.isVisible(); 
+    }
+
+    async priceOfTheFirstTaiffIsVisible() {
+        const priceOfTheFirstTaiff = this.page.locator(".group-price").first();
+        await priceOfTheFirstTaiff.isVisible();  
+    }
+
+    async zumOnlineAntragButtonIsVisible() {
+        const zumOnlineAntragButton = this.page.locator("xpath = (//button[text()='Zum Online-Antrag'])[1]");
+        await zumOnlineAntragButton.isVisible();    
+    }
+
 }

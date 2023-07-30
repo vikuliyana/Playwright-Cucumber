@@ -80,7 +80,6 @@ When('I click on the button labeled 20 weitere Tarife laden', async function () 
 
 
 Then('I should see the next 20 tariffs displayed', async function () {
-    // await pageFixture.page.locator("xpath = //product-list[@class='product-list comparison-footer-is-open']//product").nth(20).waitFor();
     await pageFixture.page.waitForTimeout(2000);
     await searchTariffsPage.totalNumberOFAvailableTariffsToEqual(40); 
     });
@@ -92,16 +91,12 @@ Then('I can continue to load any additional tariffs until all tariffs have been 
     
 
 Given('I display the tariff result list page', async function () {
-    const resultList = pageFixture.page.locator("results-container"); 
-    
-    await resultList.isVisible();     
+    await searchTariffsPage.resultListIsVisible();     
   });
   
 
 Then('I should see the tariff price of the first tariff', async function () {
-    const priceOfTheFirstTaiff = pageFixture.page.locator(".group-price").first();
-
-    await priceOfTheFirstTaiff.isVisible();      
+    await searchTariffsPage.priceOfTheFirstTaiffIsVisible();     
   });
   
 
@@ -135,8 +130,6 @@ Then('I see tariff details sections: “Miete & Immobilien” and “Dokumente�
 
 
 Then('I see the ZUM ONLINE-ANTRAG button', async function () {
-    const zumOnlineAntragButton = pageFixture.page.locator("xpath = (//button[text()='Zum Online-Antrag'])[1]");
-
-    await zumOnlineAntragButton.isVisible();  
+    await searchTariffsPage.zumOnlineAntragButtonIsVisible();
     });
 
