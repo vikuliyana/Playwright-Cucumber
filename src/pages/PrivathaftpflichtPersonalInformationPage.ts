@@ -11,13 +11,13 @@ export default class PrivathaftpflichtPersonalInformationPage {
 
     private Elements = {
         jetztVergleichenBtn: "button.button",
-        birthdateFieldLocator: "TT.MM.JJJJ",
+        birthdateFieldLocator: "input[placeholder='TT.MM.JJJJ']",
         zipCodeFieldLocator: "#prestep_postcode"
     }
 
     async enterBirthdate(date: string) {
-        const birthdateField = this.page.getByPlaceholder(this.Elements.birthdateFieldLocator);
-        await this.page.waitForTimeout(5000);
+        const birthdateField = this.page.locator(this.Elements.birthdateFieldLocator);
+        await this.page.waitForTimeout(3000);
         await this.base.fillTheField(birthdateField, date)
     }
 
