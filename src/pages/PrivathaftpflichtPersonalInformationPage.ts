@@ -17,6 +17,7 @@ export default class PrivathaftpflichtPersonalInformationPage {
 
     async enterBirthdate(date: string) {
         const birthdateField = this.page.getByPlaceholder(this.Elements.birthdateFieldLocator);
+        await this.page.waitForTimeout(5000);
         await this.base.fillTheField(birthdateField, date)
     }
 
